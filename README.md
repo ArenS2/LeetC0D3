@@ -31,7 +31,7 @@ Author: @matpro
 	```
 	- Bài toán đặt ra ở đây sẽ là: chúng ta sẽ tìm và nhập 2 biến `username` & `password` (tạm thay bằng `m`, `n` tương ứng) sao cho: 
 		- (x<sup>m</sup> % p)\*(y<sup>n</sup> % p) % p == `server_hash` 
-	- ***Hay 1 cách dễ hiểu đề bài sẽ là: với `p`, `x`, `y`, `a`, `b` cho trước, tìm `m`, `n` (lần lượt khác `a`, `b`) sao cho:*** 
+	- **Hay 1 cách dễ hiểu đề bài sẽ là: với `p`, `x`, `y`, `a`, `b` cho trước, tìm `m`, `n` (lần lượt khác `a`, `b`) sao cho:** 
 		- ***x<sup>a</sup> . y<sup>b</sup> ≡ x<sup>m</sup> . y<sup>n</sup> (mod p)***
 - Vì đây là lần đầu chơi **Crypto** ở những dạng thiên về toán học như thế này, việc đầu tiên của mình là ngơ ngác nhìn đề, đọc thuật toán và chẳng biết làm gì tiếp theo. Sau vài canh giờ ngu ngơ, mình bắt đầu xem youtube, photo tài liệu, học lại số học: số nguyên tố, đồng dư các kiểu. Cảm giác như vừa khóc vừa học lại các kiến thức từ hồi tận cấp 2 :haiz. Rồi sau gần chục tiếng loay hoay mà không có kết quả, còn vài giờ nữa là cuộc thi kết thúc, mình vô tình phát hiện ra bài toán này trong 1 slide nào đó của tụi học sinh cấp 2:
 <img src=assets/a1.png>
@@ -40,14 +40,14 @@ Author: @matpro
 <img src=assets/a2.png>
 
 - Đến đây cảm giác gần giải ra càng ngày càng rõ ràng hơn, mình bắt đầu viết lại phương trình và yêu cầu đề cho:
-	- (1): x<sup>a</sup> . y<sup>b</sup> ≡ k (mod p)
-	- (2): x<sup>m</sup> . y<sup>n</sup> ≡ k (mod p)
+	- **(1)**:  x<sup>a</sup> . y<sup>b</sup> ≡ k (mod p)
+	- **(2)**:  x<sup>m</sup> . y<sup>n</sup> ≡ k (mod p)
 - Chuyện sẽ chẳng đi đến đâu, bài toán cũng chẳng thể giải nếu chỉ 2 phương trình trên. Tuy nhiên, mấu chốt vấn đề chính là nằm ở số nguyên `p` cực lớn kia cùng với bài toán cấp 2 mình vừa phát hiện. Nhờ vào tụi nó mà mình có ngay phương trình thứ 3 - phương trình cứu rỗi bài toán :xD
-	- (3): x<sup>p-1</sup> . y<sup>p-1</sup> ≡ 1 (mod p)
+	- **(3)**:  x<sup>p-1</sup> . y<sup>p-1</sup> ≡ 1 (mod p)
 - Ngay sau đó áp dụng ngay các kiến thức cơ bản vừa được ôn lại:
 <img src=assets/a3.png>
 
-- Lấy (1) * (3) vế theo vế và so sánh với (2) ta được:
+- Lấy **(1)** \* **(3)** vế theo vế và so sánh với **(2)** ta được:
 x<sup>a+p-1</sup> . y<sup>b+p-1</sup> ≡ x<sup>m</sup> . y<sup>n</sup> (mod p)
 - Từ đó cho 2 chúng nó bằng nhau và ta tính được: `m = a + p - 1` và `n = b + p -1`
 - Về mặt lý thuyết ta đã giải xong bài toán, nhưng trong code bài cho nó chặt chẽ hơn: chỉ cho phép độ dài của `m`, `n` ở hệ hex <= 512 kí tự, nhưng với kết quả ta vừa tính được, độ dài của cả `m` và `n` đều là 513.
@@ -68,7 +68,7 @@ except:
 <img src=assets/a4.png>
 
 - Do đó, từ 3 phương trình đó ta phải biến đổi lại 1 chút để giảm được giá trị `m` và `n`.
-- Ta lấy (1)<sup>2</sup> \* (3) rồi so sánh với (2)<sup>2</sup>, ta được:
+- Ta lấy **(1)**<sup>2</sup> \* **(3)** rồi so sánh với **(2)**<sup>2</sup>, ta được:
 x<sup>2a+p-1</sup>.y<sup>2b+p-1</sup> ≡ x<sup>2m</sup>.y<sup>2n</sup> (mod p)
 - Cho 2 chúng nó bằng nhau ta được `m = a + (p-1)/2` và `n = b + (p-1)/2`.
 ```sh
