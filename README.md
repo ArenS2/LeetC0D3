@@ -31,8 +31,8 @@ Author: @matpro
 	```
 	- Bài toán đặt ra ở đây sẽ là: chúng ta sẽ tìm và nhập 2 biến `username` & `password` (tạm thay bằng `m`, `n` tương ứng) sao cho: 
 		- (x<sup>m</sup> % p)\*(y<sup>n</sup> % p) % p == `server_hash` 
-	- Hay 1 cách dễ hiểu đề bài sẽ là: với `p`, `x`, `y`, `a`, `b` cho trước, tìm `m`, `n` (lần lượt khác `a`, `b`) sao cho: 
-		- x<sup>a</sup> . y<sup>b</sup> ≡ x<sup>m</sup> . y<sup>n</sup> (mod p)
+	- ***Hay 1 cách dễ hiểu đề bài sẽ là: với `p`, `x`, `y`, `a`, `b` cho trước, tìm `m`, `n` (lần lượt khác `a`, `b`) sao cho:*** 
+		- `x<sup>a</sup> . y<sup>b</sup> ≡ x<sup>m</sup> . y<sup>n</sup> (mod p)`
 - Vì đây là lần đầu chơi **Crypto** ở những dạng thiên về toán học như thế này, việc đầu tiên của mình là ngơ ngác nhìn đề, đọc thuật toán và chẳng biết làm gì tiếp theo. Sau vài canh giờ ngu ngơ, mình bắt đầu xem youtube, photo tài liệu, học lại số học: số nguyên tố, đồng dư các kiểu. Cảm giác như vừa khóc vừa học lại các kiến thức từ hồi tận cấp 2 :haiz. Rồi sau gần chục tiếng loay hoay mà không có kết quả, còn vài giờ nữa là cuộc thi kết thúc, mình vô tình phát hiện ra bài toán này trong 1 slide nào đó của tụi học sinh cấp 2:
 <img src=assets/a1.png>
 
