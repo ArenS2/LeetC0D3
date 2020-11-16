@@ -35,6 +35,7 @@ Author: @matpro
 		- x<sup>a</sup> . y<sup>b</sup> ≡ x<sup>m</sup> . y<sup>n</sup> (mod p)
 - Vì đây là lần đầu chơi **Crypto** ở những dạng thiên về toán học như thế này, việc đầu tiên của mình là ngơ ngác nhìn đề, đọc thuật toán và chẳng biết làm gì tiếp theo. Sau vài canh giờ ngu ngơ, mình bắt đầu xem youtube, photo tài liệu, học lại số học: số nguyên tố, đồng dư các kiểu. Cảm giác như vừa khóc vừa học lại các kiến thức từ hồi tận cấp 2 :haiz. Rồi sau gần chục tiếng loay hoay mà không có kết quả, còn vài giờ nữa là cuộc thi kết thúc, mình vô tình phát hiện ra bài toán này trong 1 slide nào đó của tụi học sinh cấp 2:
 <img src=assets/a1.png>
+
 - Không chần chờ gì nữa, mình nhảy vào test ngay và kết quả không ngoài mong đợi: 
 <img src=assets/a2.png>
 
@@ -45,6 +46,7 @@ Author: @matpro
 	- (3): x<sup>p-1</sup> . y<sup>p-1</sup> ≡ 1 (mod p)
 - Ngay sau đó áp dụng ngay các kiến thức cơ bản vừa được ôn lại:
 <img src=assets/a3.png>
+
 - Lấy (1) * (3) vế theo vế và so sánh với (2) ta được:
 x<sup>a+p-1</sup> . y<sup>b+p-1</sup> ≡ x<sup>m</sup> . y<sup>n</sup> (mod p)
 - Từ đó cho 2 chúng nó bằng nhau và ta tính được: `m = a + p - 1` và `n = b + p -1`
