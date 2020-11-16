@@ -48,8 +48,9 @@ Author: @matpro
 - Lấy (1) * (3) vế theo vế và so sánh với (2) ta được:
 x<sup>a+p-1</sup> . y<sup>b+p-1</sup> ≡ x<sup>m</sup> . y<sup>n</sup> (mod p)
 - Từ đó cho 2 chúng nó bằng nhau và ta tính được: `m = a + p - 1` và `n = b + p -1`
-- Về mặt lý thuyết ta đã giải xong bài toán, nhưng trong code bài cho nó chặt chẽ hơn: chỉ cho phép độ dài của `m`, `n` ở hệ hex <= 512 kí tự, nhưng với kết quả ta vừa tính được, độ dài của cả `m` và `n` đều là 513
+- Về mặt lý thuyết ta đã giải xong bài toán, nhưng trong code bài cho nó chặt chẽ hơn: chỉ cho phép độ dài của `m`, `n` ở hệ hex <= 512 kí tự, nhưng với kết quả ta vừa tính được, độ dài của cả `m` và `n` đều là 513.
 <img src=assets/a4.png>
+
 ```sh
 try:
 	print('Username:') 
