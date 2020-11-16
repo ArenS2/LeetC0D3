@@ -52,21 +52,17 @@ x<sup>a+p-1</sup> . y<sup>b+p-1</sup> ≡ x<sup>m</sup> . y<sup>n</sup> (mod p)
 <img src=assets/a4.png>
 ```sh
 try:
-	print('Username:')
-	username = input()
-	assert len(username) <= 512
-	username = unhexlify(username)
-	print('Password:')
-	password = input()
-	assert len(password) <= 512
-	password = unhexlify(password)
-except:
-	print("Input too long! I can't keep in memory such long data")
-	exit()
-
-if username == b'admin' or password == b'password':
-	print("Intrusion detected! Admins can login only from inside our LAN!")
-	exit()
+	print('Username:') 
+	username = input() 
+	assert len(username) <= 512 
+	username = unhexlify(username) 
+	print('Password:') 
+	password = input() 
+	assert len(password) <= 512 
+	password = unhexlify(password) 
+except: 
+	print("Input too long! I can't keep in memory such long data") 
+	exit() 
 ``` 
 - Do đó, từ 3 phương trình đó ta phải biến đổi lại 1 chút để giảm được giá trị `m` và `n`.
 - Ta lấy (1)<sup>2</sup> \* (3) rồi so sánh với (2)<sup>2</sup>, ta được:
