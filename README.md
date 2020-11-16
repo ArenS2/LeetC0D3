@@ -11,7 +11,7 @@ Author: @matpro
 - Vì đây là bài writeup đầu tiên của mình về mảng **Crypto**  nên có thể sẽ  không đầy đủ như ý đồ của tác giả.  Tuy nhiên mình sẽ cố gắng viết chi tiết một tí.
 - Đầu tiên khi vào bài này, tác giả cho chúng ta 1 file [challenge.py](problem/challenge.py)
 - File code đó tương đối dài nên mình sẽ tóm tắt những ý quan trọng về nội dung của file code đó:
-	- Đầu tiên tác giả tạo sẵn biến nguyên `p` rất lớn (2049 bits) 
+	- Đầu tiên tác giả tạo sẵn 1 biến nguyên `p` rất lớn (2049 bits) 
 	```sh
 	p = 43401284375631863165968499011197727448907264840342630537012422089599453290392542589198227993829403166459913232354777490444915201356560807401141203961578150815557853865678753463969663318864902106651761912058979552119867603661163587639785030788676120329044248495611269533429749805119341551183130515359738240737511058829539566547367223386189286492001611298474857947463007621758421914760578235374029873653721324392107800911728989887542225179963985432894355552676403863014228425990320221892545963512002645771206151750279770286101983884882943294435823971377082846859794746562204984002166172161020302386671098808858635655367
 	```	
@@ -38,10 +38,10 @@ Author: @matpro
 <img src=assets/a2.png>
 
 - Đến đây cảm giác gần giải ra càng ngày càng rõ ràng hơn, mình bắt đầu viết lại phương trình và yêu cầu đề cho:
-(1) x<sup>a</sup> . y<sup>b</sup> ≡ k (mod p)
-(2) x<sup>m</sup> . y<sup>n</sup> ≡ k (mod p)
+	- (1): x<sup>a</sup> . y<sup>b</sup> ≡ k (mod p)
+	- (2): x<sup>m</sup> . y<sup>n</sup> ≡ k (mod p)
 - Chuyện sẽ chẳng đi đến đâu, bài toán cũng chẳng thể giải nếu chỉ 2 phương trình trên. Tuy nhiên, mấu chốt vấn đề chính là nằm ở số nguyên `p` cực lớn kia cùng với bài toán cấp 2 mình vừa phát hiện. Nhờ vào tụi nó mà mình có ngay phương trình thứ 3 - phương trình cứu rỗi bài toán :xD
-(3) x<sup>p-1</sup> . y<sup>p-1</sup> ≡ 1 (mod p)
+	- (3): x<sup>p-1</sup> . y<sup>p-1</sup> ≡ 1 (mod p)
 - Ngay sau đó áp dụng ngay các kiến thức cơ bản vừa ôn lại được
 <img src=assets/a3.png>
 - Lấy (1) * (3) vế theo vế và so sánh với (2) ta được:
