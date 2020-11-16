@@ -60,9 +60,12 @@ try:
 	password = input()
 	assert len(password) <= 512
 	password = unhexlify(password)
-	#print(password)
 except:
 	print("Input too long! I can't keep in memory such long data")
+	exit()
+
+if username == b'admin' or password == b'password':
+	print("Intrusion detected! Admins can login only from inside our LAN!")
 	exit()
 ``` 
 - Do đó, từ 3 phương trình đó ta phải biến đổi lại 1 chút để giảm được giá trị `m` và `n`.
