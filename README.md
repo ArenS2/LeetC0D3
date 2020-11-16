@@ -42,7 +42,7 @@ Author: @matpro
 - Đến đây cảm giác gần giải ra càng ngày càng rõ ràng hơn, mình bắt đầu viết lại phương trình và yêu cầu đề cho:
 	- **(1)**:  x<sup>a</sup> . y<sup>b</sup> ≡ k (mod p)
 	- **(2)**:  x<sup>m</sup> . y<sup>n</sup> ≡ k (mod p)
-- Chuyện sẽ chẳng đi đến đâu, bài toán cũng chẳng thể giải nếu chỉ 2 phương trình trên. Tuy nhiên, mấu chốt vấn đề chính là nằm ở số nguyên `p` cực lớn kia cùng với bài toán cấp 2 mình vừa phát hiện. Nhờ vào tụi nó mà mình có ngay phương trình thứ 3 - phương trình quyết định của bài toán :xD
+- Chuyện sẽ chẳng đi đến đâu, bài toán cũng chẳng thể giải nếu chỉ 2 phương trình trên. Tuy nhiên, mấu chốt vấn đề chính là nằm ở số nguyên `p` cực lớn kia cùng với bài toán cấp 2 mình vừa phát hiện. Nhờ vào tụi nó mà mình có ngay phương trình thứ 3 - **phương trình quyết định** của bài toán :xD
 	- **(3)**:  x<sup>p-1</sup> . y<sup>p-1</sup> ≡ 1 (mod p)
 - Ngay sau đó áp dụng ngay các kiến thức cơ bản vừa được ôn lại:
 <img src=assets/a3.png>
