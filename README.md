@@ -67,7 +67,7 @@ except:
 ``` 
 <img src=assets/a4.png>
 
-- Do đó, từ 3 phương trình đó ta phải biến đổi lại 1 chút để giảm được giá trị `m` và `n`.
+- Do đó, từ 3 phương trình trên ta phải biến đổi lại 1 chút để giảm được giá trị `m` và `n`.
 - Ta lấy **(1)**<sup>2</sup> \* **(3)** rồi so sánh với **(2)**<sup>2</sup>, ta được:
 x<sup>2a+p-1</sup>.y<sup>2b+p-1</sup> ≡ x<sup>2m</sup>.y<sup>2n</sup> (mod p)
 - Cho 2 chúng nó bằng nhau ta được `m = a + (p-1)/2` và `n = b + (p-1)/2`.
