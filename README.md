@@ -78,4 +78,4 @@ n = 2170064218781593158298424950559886372445363242017131526850621104479972664519
 - Kiểm tra thì thỏa mãn với yêu cầu độ dài. Giờ chỉ việc chuyển sang hệ hex (theo yêu cầu trong code) và submit thôi:
 <img src=assets/a5.png>
 
-**P/s: Nói chung là vã thật nhưng mà vui :vv**
+**P/s: Nói chung là bài này vã thật nhưng mà vui :vv**
