@@ -43,7 +43,7 @@ Author: @matpro
 	- (2): x<sup>m</sup> . y<sup>n</sup> ≡ k (mod p)
 - Chuyện sẽ chẳng đi đến đâu, bài toán cũng chẳng thể giải nếu chỉ 2 phương trình trên. Tuy nhiên, mấu chốt vấn đề chính là nằm ở số nguyên `p` cực lớn kia cùng với bài toán cấp 2 mình vừa phát hiện. Nhờ vào tụi nó mà mình có ngay phương trình thứ 3 - phương trình cứu rỗi bài toán :xD
 	- (3): x<sup>p-1</sup> . y<sup>p-1</sup> ≡ 1 (mod p)
-- Ngay sau đó áp dụng ngay các kiến thức cơ bản vừa ôn lại được
+- Ngay sau đó áp dụng ngay các kiến thức cơ bản vừa được ôn lại:
 <img src=assets/a3.png>
 - Lấy (1) * (3) vế theo vế và so sánh với (2) ta được:
 x<sup>a+p-1</sup> . y<sup>b+p-1</sup> ≡ x<sup>m</sup> . y<sup>n</sup> (mod p)
