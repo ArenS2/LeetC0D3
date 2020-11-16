@@ -49,8 +49,6 @@ Author: @matpro
 x<sup>a+p-1</sup> . y<sup>b+p-1</sup> ≡ x<sup>m</sup> . y<sup>n</sup> (mod p)
 - Từ đó cho 2 chúng nó bằng nhau và ta tính được: `m = a + p - 1` và `n = b + p -1`
 - Về mặt lý thuyết ta đã giải xong bài toán, nhưng trong code bài cho nó chặt chẽ hơn: chỉ cho phép độ dài của `m`, `n` ở hệ hex <= 512 kí tự, nhưng với kết quả ta vừa tính được, độ dài của cả `m` và `n` đều là 513.
-<img src=assets/a4.png>
-
 ```sh
 try:
 	print('Username:') 
@@ -65,6 +63,8 @@ except:
 	print("Input too long! I can't keep in memory such long data") 
 	exit() 
 ``` 
+<img src=assets/a4.png>
+
 - Do đó, từ 3 phương trình đó ta phải biến đổi lại 1 chút để giảm được giá trị `m` và `n`.
 - Ta lấy (1)<sup>2</sup> \* (3) rồi so sánh với (2)<sup>2</sup>, ta được:
 x<sup>2a+p-1</sup>.y<sup>2b+p-1</sup> ≡ x<sup>2m</sup>.y<sup>2n</sup> (mod p)
