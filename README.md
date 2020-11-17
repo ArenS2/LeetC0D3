@@ -18,13 +18,13 @@ Author: @AntonioLic, @matpro
 - Giờ thử tìm hàm `win()` đó nào. Vì file này không bị `stripped` nên các tên hàm và tên biến đều được giữ nguyên khi biên dịch. Đây chính là 1 trong những lợi thế vô cùng quan trọng khi debug. 
 <img src=assets/a2.png>
 
-Dùng **IDA** chúng ta dễ dàng nhận ra ngay 1 hàm có tên là `winFunc()` và khả năng rất cao đây chính là hàm in ra flag cho chúng ta.  
+- Dùng **IDA** chúng ta dễ dàng nhận ra ngay 1 hàm có tên là `winFunc()` và khả năng rất cao đây chính là hàm in ra flag cho chúng ta.  
 <img src=assets/a3.png>
 
-- Nếu theo hướng đó, việc chúng ta cần làm rất đơn giản. Đổi 1 hàm trong main (điều kiện: hàm này phải chắc chắn được gọi) thành hàm `winFunc()`. Ở đây mình chọn hàm `menu()`.
+- Nếu theo hướng đó, việc chúng ta cần làm rất đơn giản. Đổi 1 hàm trong `main()` (điều kiện: hàm này phải chắc chắn được gọi) thành hàm `winFunc()`. Ở đây mình chọn hàm `menu()`.
 <img src=assets/a4.png>
 
-- Sau đó vào **Edit -> Patch Program -> Assemble** của **IDA** để thay đổi câu lệnh `call` đó. Và hàm main lúc này trở thành:
+- Sau đó vào **Edit -> Patch Program -> Assemble** của **IDA** để thay đổi câu lệnh `call` đó. Và hàm `main()` lúc này trở thành:
 <img src=assets/a5.png>
 
 - Sau đó Save lại [chương trình vừa được patch](solve/WubbaLubbaDubDub) và ra ngoài chạy lại chương trình đó và lấy được flag.
