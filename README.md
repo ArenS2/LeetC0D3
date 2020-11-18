@@ -42,17 +42,24 @@ Can you help me to recover the content of the file?
 
 ### Example:
 - Đầu tiên, chọn 2 số nguyên tố ngẫu nhiên khác nhau: `p = 7` và `q = 13`
+
 - Tiếp theo tính `Modulus n`: `n = p*q = 91`
+
 - Tiếp theo tính `Hàm Euler ϕ`: `ϕ = (p-1)*(q-1) = 72`
+
 - Sau đó chọn `e = 5` vì `gcd(e, ϕ) = gcd(5, 72) = 1`
+
 - Tiếp theo chọn `d = 29` vì `d.e ≡ 1 (mod ϕ)`
+
 - Giả sử ta có `plain_text` `m = 69`, theo công thức ở trên thì `c` = m<sup>e</sup> (mod n). Do đó `c = 62`.
+
 - Bây giờ thử dùng `d` để giải mã `c` để xem thử có lấy lại được `m = 69` không nhé.
+
 - `m` = c<sup>d</sup> (mod n). Và tính ra thì đúng là `m = 69` thật.
 
 ---> Đấy thế là bạn đã hiểu phần nào về RSA rồi đấy, bây giờ đã đủ tự tin để làm cái đề kia thôi :xD
 
-## Sovle Crypto problem
+## Solve Crypto problem
 - Đề bài cho chúng ta 2 file: [encrypted](problem/encrypted.txt) và [public.pem](problem/public.pem)
 
 - Vừa nhìn vào cái đuôi file `.pem` là nghĩ ngay đến RSA rồi. Bây giờ cùng nhìn xem file `public_key` bên trong nó sẽ như thế nào nhá :excited_icon
@@ -70,8 +77,11 @@ n = 0xbe5f670c7cdfcc0bd34112d3bd71229fd3e446e531bf3516036c1258336f6c51
 e = 0x10001
 ```
 - Vâng, lúc này chúng ta đã có `public_key`, ngoài ra còn cả cả `cipher_text`, chính là nội dung trong file [encrypted.txt](problem/encrypted.txt) kia. Cơ mà chỉ có `n`, `e`, và `c` thì làm sao chúng ta có thể giải mã mà không có `d` được. Do đó chúng ta phải đi tìm `d` từ `e` và `n` có sẵn kia.
+
 - Để xem lúc nãy `d` được tính như nào: `d*e ≡ 1 (mod ϕ)`
+
 - Chúng ta đã có `e` nhưng chưa có `ϕ` mà `ϕ = (p-1)*(q-1)`, mà chúng ta đã có `p`, `q` đâu cơ chứ.
+
 - Quay lại lên trên xem lý thuyết tiếp ta thấy `n = p*q`. Cũng may bài này dễ nên tác giả chọn `p`, `q` nhỏ nên `n` cũng nhỏ theo. Giới thiệu luôn trên mạng có trang này [factordb.com](http://factordb.com/) dùng để phân tích 1 số ra tích của các số nguyên tố, cái hay ở trang này so với các trang khác là nó phân tích được những số lớn. OK, đem vào đó `Factorize` ta sẽ có ngay 2 số `p` và `q`.
 ```sh
 n = 86108002918518428671680621078381724386896258624262971787023054651438740237393
@@ -111,10 +121,12 @@ d = 5256323549686815474372117928592610686785612126858636811540979581908974489513
 <img src=assets/p4.png>
 
 - Cuối cùng `flag` sẽ là **AFFCTF{PermRecord}**. (Đoạn chuyển flag từ `int` sang `string` cẩn thận tí nhé :vv) 
+- File code dành cho bài này mình để ở [đây](solve/solve.py).
 
 ## Bonus
 - Còn bây giờ là phần ngoài bài toán 1 tí. Thật ra trước giờ lúc tạo 2 file `public_key` và `private_key` mình toàn dùng tools để tạo, à không tools thì phải dùng rồi vì cho mình code tools đó chắc cũng khóc dở, ý mình là khi dùng tools ấy thì mấy tham số `p`, `q`, `n`, `e`, `d` đều do tools tạo ngẫu nhiên hết. Với nhu cầu hiện tại của mình, mình muốn tạo 2 file `key` đó với các tham số do mình định sẵn nên mình mới viết cái `Bonus` này để lưu lại quá trình  (Sau này lỡ muốn tự tạo file `public_key` và `private_key` cho riêng mình thì cũng biết đường mà làm :hehe).
-- OK, bắt đầu làm thôi, để làm và test độ đúng sai luôn thì mình lấy các tham số `n`, `e`, `d` giống như bài trên, chặp nữa lúc endgame ra được file `public_key` trùng với file `public_key` của đề cho là ok.
+
+- OK, bắt đầu làm thôi, để làm và test độ đúng sai luôn thì mình lấy các tham số `n`, `e`, `d` giống như bài trên, chặp nữa lúc endgame ra được file `public_key` trùng với file `public_key` [public.pem](problem/public.pem) của đề cho là ok.
 ```sh
 n = 86108002918518428671680621078381724386896258624262971787023054651438740237393
 p = 286748798713412687878508722355577911069
