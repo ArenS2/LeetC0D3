@@ -44,7 +44,7 @@ nên giải pháp sẽ là thay kí tự `space` bằng `${IFS}`.
 	- Tiếp tục trong hàm **checkFlag** còn hàm nào thì tìm lỗ hổng của hàm đấy thôi. Tiếp đến là hàm `strpos`, thèn này cũng có 1 bug cho phép bypass việc lọc kí tự nhưng đòi hỏi phải có kí tự `%`, mà kí tự này cũng lại bị chặn :TT
 	- Cứ thế tương tự cho các hàm tiếp theo mà search tiếp nhưng chẳng thu được kết quả gì :TT 
 
-- Hướng 3: Tận dụng **wget** đề cho
+- Hướng 3: Tận dụng **wget** đề cho:
 		```sh
 		$command = "wget -q -O - https://kuhi.to/flag/" . $flag;
 		$cmd_output = array();
