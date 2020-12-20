@@ -45,6 +45,7 @@ nên giải pháp sẽ là thay kí tự `space` bằng `${IFS}`.
 	- Cứ thế tương tự cho các hàm tiếp theo mà search tiếp nhưng chẳng thu được kết quả gì :TT 
 
 - Hướng 3: Tận dụng **wget** đề cho:
+
 		```sh
 		$command = "wget -q -O - https://kuhi.to/flag/" . $flag;
 		$cmd_output = array();
@@ -58,9 +59,12 @@ nên giải pháp sẽ là thay kí tự `space` bằng `${IFS}`.
 
 P/S: Nói chung qua challenge này được ôn lại `command injection` cũng nhiều, chỉ là vì không liên quan nên không nói cụ thể trong bài này nên đành để lại 1 số reference tại đây vậy :xD
 
-[Shell Command Language](https://pubs.opengroup.org/onlinepubs/009604499/utilities/xcu_chap02.html).
-[Payloads All The Things](https://github.com/swisskyrepo/PayloadsAllTheThings).
-[Web-CTF-Cheatsheet](https://github.com/w181496/Web-CTF-Cheatsheet#%E7%A9%BA%E7%99%BD%E7%B9%9E%E9%81%8E).
-[Command Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection).
+[Shell Command Language](https://pubs.opengroup.org/onlinepubs/009604499/utilities/xcu_chap02.html)
+
+[Payloads All The Things](https://github.com/swisskyrepo/PayloadsAllTheThings)
+
+[Web-CTF-Cheatsheet](https://github.com/w181496/Web-CTF-Cheatsheet#%E7%A9%BA%E7%99%BD%E7%B9%9E%E9%81%8E)
+
+[Command Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
 
 
