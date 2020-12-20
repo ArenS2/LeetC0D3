@@ -11,15 +11,14 @@ Author: yakuhito
 <img src=assets/p1.png>
 
 - Sau khi đọc code, ta có thể thấy ngay yêu cầu của challenge này như sau:
-	- Nhận 1 biến có tên là `flag` thông qua phương thức `GET`.
+	- Nhận 1 tham số có tên là `flag` thông qua phương thức `GET`.
 	- Sau đó sẽ vào hàm **checkFlag** để kiểm tra chuỗi của chúng ta nhập vào, nếu có bất kì 1 kí tự nào trong chuỗi của chúng ta nhập vào không thuộc chuỗi này (cả lowercase và uppercase) **'FAKE-X-MAS{d1s_i\$_a_SaMpL3_Fl4g_n0t_Th3_c0Rr3c7_one_karen_l1k3s_HuMu5.0123456789}'** thì hàm **checkFlag** sẽ trả về `False` và kết thúc chương trình.
 	- Nếu chuỗi của chúng ta nhập làm cho hàm **checkFlag** trả về `True` thì chúng ta sẽ đến được hàm **getFlag**. Ở hàm này, chúng ta được phép thực thi lệnh thông qua hàm **exec()** của `php`, cụ thể là `"wget -q -O - https://kuhi.to/flag/" . $flag` với biến `$flag` chính là chuỗi chúng ta nhập vào sau khi đã được kiểm tra ở hàm **checkFlag**.
 
 - Tiếp theo chúng ta sẽ phân tích bài toán:
 	- Đầu tiên để có thể dễ dàng debug (custom lại file source) hoặc build lại chương trình này để test (trường hợp sau khi server của challenge đã đóng) thì có thể sử dụng file [index.php](problem/index.php) đề cho và dùng chương trình `php` để chạy chương trình cục bộ:
 <img src=assets/p4.png>
-
-	- Nhìn vào source code, chúng ta sẽ nhanh chóng nhận ra `flag` nằm trong file `flag.php`, cùng thư mục với file `index.php`
+	- Nhìn vào source code, chúng ta sẽ nhanh chóng nhận ra `flag` nằm trong file `flag.php`, cùng thư mục với file `index.php`.
 	- Dựa theo `output`của chương trình, chúng ta hoàn toàn không lấy được `flag`, cụ thể ở hàm **getFlag** chúng ta chỉ nhận được `Nope` hoặc `Maybe`. Cho nên hướng giải quyết sẽ là đẩy `flag` ra ngoài internet thông qua hàm **exec()**. Đến đây sẽ có 3 hướng giải quyết cho challenge này.
 
 - Hướng 1: **Command Injection**
