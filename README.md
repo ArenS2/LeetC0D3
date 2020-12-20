@@ -16,7 +16,7 @@ Author: yakuhito
 	- Nếu chuỗi của chúng ta nhập làm cho hàm **checkFlag** trả về `True` thì chúng ta sẽ đến được hàm **getFlag**. Ở hàm này, chúng ta được phép thực thi lệnh thông qua hàm **exec()** của `php`, cụ thể là `"wget -q -O - https://kuhi.to/flag/" . $flag` với biến `$flag` chính là chuỗi chúng ta nhập vào sau khi đã được kiểm tra ở hàm **checkFlag**.
 
 - Tiếp theo chúng ta sẽ phân tích bài toán:
-	- Đầu tiên để có thể dễ dàng debug (custom lại file source) hoặc build lại chương trình này để test (trường hợp sau khi server của challenge đã đóng) thì có thể sử dụng file [index.php](problem/index.php) đề cho và dùng chương trình `php` để chạy chương trình cục bộ:
+	- Đầu tiên để có thể dễ dàng debug (custom lại file source) hoặc build lại chương trình này để test (trường hợp sau khi server của challenge đã đóng) thì có thể sử dụng file [index.php](problem/index.php) đề cho và dùng chương trình `php` để chạy chương trình cục bộ.
 <img src=assets/p4.png>.
 
 	- Nhìn vào source code, chúng ta sẽ nhanh chóng nhận ra `flag` nằm trong file `flag.php`, cùng thư mục với file `index.php`.
@@ -27,7 +27,7 @@ Author: yakuhito
 	- Đọc file: để đọc được file flag.php chúng ta có thể dùng `cat` (ngoài ra có thể dùng: `tac, head, tail, sort, nl, cut, awk, sed, base64...` sở dĩ có chú thích này vì có cũng có 1 bài tương tự nhưng bài đó họ xóa hết tất cả các chương trình dùng để đọc file nên chúng ta phải tùy cơ ứng biến thôi). Tuy nhiên ở hàm **checkFlag** lại không cho phép chúng ta nhập kí tự `space`, nhưng không sao, đối với `shell injection` thì cái này bypass cũng dễ. 
 ```sh
 cat${IFS}flag.php
-cat<flag.php
+cat\<flag.php
 {cat,flag.php}
 ```.
 	- Ở đây vì hàm **checkFlag** chỉ cho phép nhập 7 kí tự đặc biệt này `-{_\$.}`.
