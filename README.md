@@ -18,6 +18,7 @@ Author: yakuhito
 - Tiếp theo chúng ta sẽ phân tích bài toán:
 	+ Đầu tiên để có thể dễ dàng debug (custom lại file source) hoặc build lại chương trình này để test (trường hợp sau khi server của challenge đã đóng) thì có thể sử dụng file [index.php](problem/index.php) đề cho và dùng chương trình `php` để chạy chương trình cục bộ:
 <img src=assets/p4.png>
+
 	+ Nhìn vào source code, chúng ta sẽ nhanh chóng nhận ra `flag` nằm trong file `flag.php`, cùng thư mục với file `index.php`
 	+ Dựa theo `output`của chương trình, chúng ta hoàn toàn không lấy được `flag`, cụ thể ở hàm **getFlag** chúng ta chỉ nhận được `Nope` hoặc `Maybe`. Cho nên hướng giải quyết sẽ là đẩy `flag` ra ngoài internet thông qua hàm **exec()**. Đến đây sẽ có 3 hướng giải quyết cho challenge này.
 
